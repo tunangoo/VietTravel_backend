@@ -21,8 +21,8 @@ import java.util.Set;
 
 @Data
 @Entity
-@Builder
 @Table(name = "users")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseEntity implements UserDetails {
@@ -32,14 +32,15 @@ public class User extends BaseEntity implements UserDetails {
     private Long id;
 
     @Column(name = "user_name", unique = true)
+    @NotNull
     private String username;
 
     @Column(name = "password")
     @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{8,}$")
+    @NotNull
     private String password;
 
     @Column(name = "avatar")
-    @NotNull
     private String avatar;
 
     @Column(name = "full_name")
@@ -47,19 +48,16 @@ public class User extends BaseEntity implements UserDetails {
     private String fullName;
 
     @Column(name = "birthday")
-    @NotNull
     private LocalDate birthday;
 
     @Column(name = "phone_number")
     @Pattern(regexp = "^[0-9]+$")
-    @NotNull
     private String phoneNumber;
 
     @Column(name = "email")
     private String email;
 
     @Column(name = "address")
-    @NotNull
     private String address;
 
     @Enumerated(EnumType.STRING)
