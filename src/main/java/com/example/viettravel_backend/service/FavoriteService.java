@@ -24,6 +24,10 @@ public class FavoriteService {
         Place place = placeRepository.findById(request.getPlace_id())
                 .orElseThrow(() -> new ParamInvalidException("Place không tồn tại"));
 
+        if(favoriteRepository.findByUserIdAndPlaceId(request.getUser_id(), request.getPlace_id()).isPresent()) {
+            throw new ParamInvalidException("Favorite đã tồn tại cho user và place đã cho");
+        }
+
         Favorite favorite = Favorite.builder()
                 .user(user)
                 .place(place)
