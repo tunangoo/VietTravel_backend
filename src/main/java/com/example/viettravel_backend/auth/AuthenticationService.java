@@ -23,18 +23,15 @@ public class AuthenticationService {
     public void register(RegisterRequest request) {
         var user = User.builder()
                 .fullName(request.getFullName())
-                .address(request.getAddress())
-                .phoneNumber(request.getPhoneNumber())
+                .email(request.getEmail())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.ROLE_USER)
                 .build();
         userRepository.save(user);
-        Favorite cart = new Favorite();
-        cart.setUser(user);
     }
 
-    public AuthenticationRespone authenticate(AuthenticationResquest request) {
+    public AuthenticationResponse authenticate(AuthenticationResquest request) {
         var user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new ParamInvalidException("Tài khoản chưa được đăng kí"));
         try {
@@ -48,7 +45,7 @@ public class AuthenticationService {
             throw new ParamInvalidException("Mật khẩu không chính xác");
         }
         var accessToken = jwtService.generateToken(user);
-        return AuthenticationRespone.builder()
+        return AuthenticationResponse.builder()
                 .accessToken(accessToken)
                 .build();
     }

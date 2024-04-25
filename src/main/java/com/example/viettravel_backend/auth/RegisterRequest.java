@@ -22,9 +22,5 @@ public class RegisterRequest {
     private String password;
 
     @NotNull
-    private String address;
-
-    @NotNull
-    @Pattern(regexp = "^[0-9]+$")
-    private String phoneNumber;
+    private String email;
 }

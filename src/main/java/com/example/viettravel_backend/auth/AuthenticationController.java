@@ -27,7 +27,7 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().body("Tên người dùng đã tồn tại");
         }
         authenticationService.register(request);
-        return ResponseEntity.ok("Register successfully");
+        return ResponseEntity.ok("Đăng ký thành công");
     }
 
     @PostMapping("/authenticate")
