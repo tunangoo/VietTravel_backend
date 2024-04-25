@@ -1,6 +1,7 @@
 package com.example.viettravel_backend.service;
 
 import com.example.viettravel_backend.dto.request.AddFavoriteRequest;
+import com.example.viettravel_backend.dto.request.DeleteFavoriteRequest;
 import com.example.viettravel_backend.entity.*;
 import com.example.viettravel_backend.repository.*;
 import com.example.viettravel_backend.exception.ParamInvalidException;
@@ -33,5 +34,21 @@ public class FavoriteService {
                 .place(place)
                 .build();
         favoriteRepository.save(favorite);
+    }
+
+    public void DeleteFavorite(DeleteFavoriteRequest request) throws ResponseStatusException {
+        User user = userRepository.findById(request.getUser_id())
+                .orElseThrow(() -> new ParamInvalidException("User không tồn tại"));
+
+        Place place = placeRepository.findById(request.getPlace_id())
+                .orElseThrow(() -> new ParamInvalidException("Place không tồn tại"));
+
+
+        var favorite = favoriteRepository.findByUserIdAndPlaceId(request.getUser_id(), request.getPlace_id());
+        if(favorite.isPresent()) {
+            favoriteRepository.delete(favorite.get());
+        } else {
+            throw new ParamInvalidException("Favorite không tồn tại cho user và place đã cho");
+        }
     }
 }

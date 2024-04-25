@@ -25,4 +25,15 @@ public class FavoriteController {
         favoriteService.AddFavorite(request);
         return ResponseEntity.ok("Thêm địa điểm yêu thích thành công");
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteFavorite(
+            @RequestBody @Valid DeleteFavoriteRequest request, BindingResult bindingResult
+    ) throws ResponseStatusException {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body("Một hoặc nhiều trường truyền vào không hợp lệ!");
+        }
+        favoriteService.DeleteFavorite(request);
+        return ResponseEntity.ok("Xóa địa điểm yêu thích thành công");
+    }
 }
