@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Service
 @RequiredArgsConstructor
 public class PlaceService {
-    public ArrayList<Place> getAllPlaces() throws ResponseStatusException {
-
-    }
+//    public ArrayList<Place> getAllPlaces() throws ResponseStatusException {
+//
+//    }
 }

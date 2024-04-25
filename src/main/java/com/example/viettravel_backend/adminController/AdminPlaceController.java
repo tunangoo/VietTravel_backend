@@ -3,7 +3,6 @@ package com.example.viettravel_backend.adminController;
 
 import com.example.viettravel_backend.adminService.AdminPlaceService;
 import com.example.viettravel_backend.dto.request.AddPlaceRequest;
-import com.example.viettravel_backend.exception.ParamInvalidException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
