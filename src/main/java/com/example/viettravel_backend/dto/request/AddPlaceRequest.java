@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -23,6 +25,9 @@ public class AddPlaceRequest {
 
     @NotNull
     private Long price;
+
+    @NotNull
+    private ArrayList<String> images;
 
     public Place mappingToPlace() {
         Place place = new Place();
