@@ -40,10 +40,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/**")
                         .permitAll()
-                        .requestMatchers("/api/admin/**")
-                        .hasRole("ADMIN")// nhung thang role_admin thi vao dc nhung api /api/admin/**
-                        .requestMatchers("/api/**")
-                        .hasAnyRole("ADMIN", "USER")// nhung thang role_user/admin thi vao dc nhung api /api/user/**
+//                        .requestMatchers("/api/admin/**")
+//                        .hasRole("ADMIN")
+//                        .requestMatchers("/api/**")
+//                        .hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess
