@@ -1,7 +1,8 @@
 package com.example.viettravel_backend.service;
 
+import com.example.viettravel_backend.dto.request.ChangePasswordRequest;
 import com.example.viettravel_backend.dto.request.UpdateInfoRequest;
-import com.example.viettravel_backend.dto.response.GetUserInfo;
+import com.example.viettravel_backend.dto.response.GetUserInfoResponse;
 import com.example.viettravel_backend.entity.User;
 import com.example.viettravel_backend.exception.ParamInvalidException;
 import com.example.viettravel_backend.repository.UserRepository;
@@ -30,9 +31,9 @@ public class UserService {
         return getUser().getId();
     }
 
-    public GetUserInfo getInfo() {
+    public GetUserInfoResponse getInfo() {
         User user = this.getUser();
-        return this.modelMapper.map(user, GetUserInfo.class);
+        return this.modelMapper.map(user, GetUserInfoResponse.class);
     }
 
     public void updateInfo(UpdateInfoRequest request) throws ResponseStatusException {

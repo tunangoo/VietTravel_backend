@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetUserInfo {
+public class GetUserInfoResponse {
     private String fullName;
 
     private LocalDate birthday;
