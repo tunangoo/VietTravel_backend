@@ -27,6 +27,9 @@ public class AddPlaceRequest {
     private Long price;
 
     @NotNull
+    private String imageUrl;
+
+    @NotNull
     private ArrayList<String> images;
 
     public Place mappingToPlace() {
@@ -35,6 +38,7 @@ public class AddPlaceRequest {
         place.setAddress(address);
         place.setDescription(description);
         place.setPrice(price);
+        place.setImageUrl(imageUrl);
         return place;
     }
 }

@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +38,10 @@ public class Place extends BaseEntity {
     @Column(name = "price")
     @NotNull
     private Long price;
+
+    @Column(name = "image_url")
+    @NotNull
+    private String imageUrl;
 
     @OneToMany(mappedBy = "place")
     private Set<Favorite> favorites;
