@@ -55,6 +55,7 @@ public class User extends BaseEntity implements UserDetails {
     private String email;
 
     @Column(name = "address")
+    @NotNull
     private String address;
 
     @Enumerated(EnumType.STRING)
