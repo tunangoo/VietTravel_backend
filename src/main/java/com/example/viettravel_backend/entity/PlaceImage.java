@@ -23,7 +23,7 @@ public class PlaceImage extends BaseEntity {
     @JoinColumn(name = "place_id", referencedColumnName = "id")
     private Place place;
 
-    @Column(name = "url")
+    @Column(name = "image_url")
     @NotNull
-    private String url;
+    private String imageUrl;
 }

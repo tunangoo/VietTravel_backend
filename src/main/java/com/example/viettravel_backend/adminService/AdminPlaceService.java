@@ -42,7 +42,7 @@ public class AdminPlaceService {
             for (String image : request.getImages()) {
                 PlaceImage placeImage = PlaceImage.builder()
                         .place(place)
-                        .url(image)
+                        .imageUrl(image)
                         .build();
                 placeImages.add(placeImage);
             }
