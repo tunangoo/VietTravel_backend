@@ -12,8 +12,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AddFavoriteRequest {
     @NotNull
-    private Long user_id;
-
-    @NotNull
     private Long place_id;
 }

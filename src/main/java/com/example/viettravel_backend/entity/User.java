@@ -52,10 +52,10 @@ public class User extends BaseEntity implements UserDetails {
     private String phoneNumber;
 
     @Column(name = "email")
+    @NotNull
     private String email;
 
     @Column(name = "address")
-    @NotNull
     private String address;
 
     @Enumerated(EnumType.STRING)

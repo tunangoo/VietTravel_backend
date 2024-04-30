@@ -1,21 +1,43 @@
 package com.example.viettravel_backend.service;
 
-import com.example.viettravel_backend.dto.request.UpdateProfileRequest;
+import com.example.viettravel_backend.dto.request.UpdateInfoRequest;
+import com.example.viettravel_backend.dto.response.GetUserInfo;
 import com.example.viettravel_backend.entity.User;
 import com.example.viettravel_backend.exception.ParamInvalidException;
 import com.example.viettravel_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
+    @Autowired
+    private ModelMapper modelMapper;
     private final UserRepository userRepository;
 
-    public User updateProfile(UpdateProfileRequest request) throws ResponseStatusException {
+    public User getUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new ParamInvalidException("User không tồn tại"));
+    }
+
+    public Long getId() {
+        return getUser().getId();
+    }
+
+    public GetUserInfo getInfo() {
+        User user = this.getUser();
+        return this.modelMapper.map(user, GetUserInfo.class);
+    }
+
+    public void updateInfo(UpdateInfoRequest request) throws ResponseStatusException {
         User user = userRepository
-                .findById(request.getId())
+                .findById(getId())
                 .orElseThrow(() -> new ParamInvalidException("Người dùng không tồn tại"));
 
         // Cập nhật các trường thông tin nếu được cung cấp trong yêu cầu
@@ -40,6 +62,5 @@ public class UserService {
         } catch (Exception e) {
             throw new ParamInvalidException("Cập nhật thông tin không thành công");
         }
-        return user;
     }
 }

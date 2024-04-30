@@ -12,10 +12,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateProfileRequest {
-    @NotNull
-    private Long id;
-
+public class UpdateInfoRequest {
     @NotNull
     private String fullName;
 

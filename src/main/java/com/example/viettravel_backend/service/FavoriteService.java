@@ -17,15 +17,16 @@ public class FavoriteService {
     private final UserRepository userRepository;
     private final PlaceRepository placeRepository;
     private final FavoriteRepository favoriteRepository;
+    private final UserService userService;
 
     public void AddFavorite(AddFavoriteRequest request) throws ResponseStatusException {
-        User user = userRepository.findById(request.getUser_id())
+        User user = userRepository.findById(userService.getId())
                 .orElseThrow(() -> new ParamInvalidException("User không tồn tại"));
 
         Place place = placeRepository.findById(request.getPlace_id())
                 .orElseThrow(() -> new ParamInvalidException("Place không tồn tại"));
 
-        if(favoriteRepository.findByUserIdAndPlaceId(request.getUser_id(), request.getPlace_id()).isPresent()) {
+        if(favoriteRepository.findByUserIdAndPlaceId(userService.getId(), request.getPlace_id()).isPresent()) {
             throw new ParamInvalidException("Favorite đã tồn tại cho user và place đã cho");
         }
 
@@ -37,14 +38,11 @@ public class FavoriteService {
     }
 
     public void DeleteFavorite(DeleteFavoriteRequest request) throws ResponseStatusException {
-        User user = userRepository.findById(request.getUser_id())
-                .orElseThrow(() -> new ParamInvalidException("User không tồn tại"));
+        if(placeRepository.existsById(request.getPlace_id())) {
+            throw new ParamInvalidException("Place không tồn tại");
+        }
 
-        Place place = placeRepository.findById(request.getPlace_id())
-                .orElseThrow(() -> new ParamInvalidException("Place không tồn tại"));
-
-
-        var favorite = favoriteRepository.findByUserIdAndPlaceId(request.getUser_id(), request.getPlace_id());
+        var favorite = favoriteRepository.findByUserIdAndPlaceId(userService.getId(), request.getPlace_id());
         if(favorite.isPresent()) {
             favoriteRepository.delete(favorite.get());
         } else {

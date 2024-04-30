@@ -12,8 +12,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DeleteFavoriteRequest {
     @NotNull
-    private Long user_id;
-
-    @NotNull
     private Long place_id;
 }
