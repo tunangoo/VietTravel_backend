@@ -1,7 +1,6 @@
 package com.example.viettravel_backend.auth;
 
 import com.example.viettravel_backend.config.JwtService;
-import com.example.viettravel_backend.entity.Favorite;
 import com.example.viettravel_backend.entity.enums.Role;
 import com.example.viettravel_backend.entity.User;
 import com.example.viettravel_backend.exception.ParamInvalidException;
@@ -47,6 +46,7 @@ public class AuthenticationService {
         var accessToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .accessToken(accessToken)
+                .user(user)
                 .build();
     }
 }
