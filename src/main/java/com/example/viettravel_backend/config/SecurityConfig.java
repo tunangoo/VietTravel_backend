@@ -38,12 +38,13 @@ public class SecurityConfig {
         http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**")
+                        .requestMatchers("/api/auth/**")
                         .permitAll()
-//                        .requestMatchers("/api/admin/**")
-//                        .hasRole("ADMIN")
-//                        .requestMatchers("/api/**")
-//                        .hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/api/admin/**")
+                        .hasRole("ADMIN")
+                        .requestMatchers("/api/**")
+                        .hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess
