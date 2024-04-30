@@ -1,10 +1,12 @@
 package com.example.viettravel_backend.auth;
 
+import com.example.viettravel_backend.exception.ParamInvalidException;
 import com.example.viettravel_backend.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,11 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(
-            @RequestBody @Valid RegisterRequest request
-    ) {
+            @RequestBody @Valid RegisterRequest request, BindingResult bindingResult
+    ) throws ResponseStatusException {
+        if (bindingResult.hasErrors()) {
+            throw new ParamInvalidException("Một hoặc nhiều trường truyền vào không hợp lệ!");
+        }
         if(userRepository.existsByUsername(request.getUsername())) {
             return ResponseEntity.badRequest().body("Tên người dùng đã tồn tại");
         }
