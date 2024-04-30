@@ -1,5 +1,6 @@
 package com.example.viettravel_backend.controller;
 
+import com.example.viettravel_backend.dto.request.ChangePasswordRequest;
 import com.example.viettravel_backend.dto.request.UpdateInfoRequest;
 import com.example.viettravel_backend.service.UserService;
 import jakarta.validation.Valid;
@@ -31,5 +32,16 @@ public class UserController {
 
     ) throws ResponseStatusException {
         return ResponseEntity.ok(userService.getInfo());
+    }
+
+    @PatchMapping("/change_password")
+    public ResponseEntity<?> changePassword(
+            @RequestBody @Valid ChangePasswordRequest request, BindingResult bindingResult
+    ) throws ResponseStatusException {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body("Một hoặc nhiều trường truyền vào không hợp lệ!");
+        }
+        userService.changePassword(request);
+        return ResponseEntity.ok("Thay đổi mật khẩu thành công");
     }
 }

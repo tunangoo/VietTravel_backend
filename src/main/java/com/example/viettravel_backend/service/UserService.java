@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,6 +20,7 @@ public class UserService {
     @Autowired
     private ModelMapper modelMapper;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public User getUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -63,5 +65,14 @@ public class UserService {
         } catch (Exception e) {
             throw new ParamInvalidException("Cập nhật thông tin không thành công");
         }
+    }
+
+    public void changePassword(ChangePasswordRequest request) throws ResponseStatusException {
+        User user = getUser();
+        if(!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new ParamInvalidException("Mật khẩu cũ không chính xác");
+        }
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
     }
 }
