@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/api/admin/place")
+@RequestMapping(value = "/api/admin/place", produces = "text/plain;charset=UTF-8")
 @RequiredArgsConstructor
 public class AdminPlaceController {
     private final AdminPlaceService adminPlaceService;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/api/favorite")
+@RequestMapping(value = "/api/favorite", produces = "text/plain;charset=UTF-8")
 @RequiredArgsConstructor
 public class FavoriteController {
     private final FavoriteService favoriteService;
