@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
@@ -47,5 +48,15 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(accessToken)
                 .build();
+    }
+
+    public void resetPassword(ResetPasswordRequest request) throws ResponseStatusException {
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new ParamInvalidException("Tên đăng nhập không tồn tại"));
+        if(!user.getEmail().equals(request.getEmail())) {
+            throw new ParamInvalidException("Email đăng ký không chính xác");
+        }
+        user.setPassword(passwordEncoder.encode("Viettravel@123"));
+        userRepository.save(user);
     }
 }

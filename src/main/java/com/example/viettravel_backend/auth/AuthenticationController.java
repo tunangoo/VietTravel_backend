@@ -38,4 +38,15 @@ public class AuthenticationController {
     ) throws ResponseStatusException {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
+
+    @PatchMapping("/reset_password")
+    public ResponseEntity<?> resetPassword(
+            @RequestBody @Valid ResetPasswordRequest request, BindingResult bindingResult
+    ) throws ResponseStatusException {
+        if (bindingResult.hasErrors()) {
+            throw new ParamInvalidException("Một hoặc nhiều trường truyền vào không hợp lệ!");
+        }
+        authenticationService.resetPassword(request);
+        return ResponseEntity.ok("Cấp lại mật khẩu thành công");
+    }
 }
