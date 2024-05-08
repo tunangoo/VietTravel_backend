@@ -13,3 +13,6 @@
 - Cấu hình db trong file application.properties 
 - Run VietTravalApplication.java
 - Swagger ui: http://localhost:8080/swagger-ui/index.html
+
+## API:
+- Reset Password đặt mật khẩu mặc định = "Viettravel@123"
