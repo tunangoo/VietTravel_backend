@@ -30,7 +30,7 @@ public class AuthenticationService {
         userRepository.save(user);
     }
 
-    public AuthenticationResponse authenticate(AuthenticationResquest request) {
+    public AuthenticationResponse authenticate(AuthenticationResquest request) throws ResponseStatusException {
         var user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new ParamInvalidException("Tài khoản chưa được đăng kí"));
         try {
@@ -44,8 +44,9 @@ public class AuthenticationService {
             throw new ParamInvalidException("Mật khẩu không chính xác");
         }
         var accessToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .accessToken(accessToken)
-                .build();
+//        return AuthenticationResponse.builder()
+//                .accessToken(accessToken)
+//                .build();
+        throw new ParamInvalidException(accessToken);
     }
 }
