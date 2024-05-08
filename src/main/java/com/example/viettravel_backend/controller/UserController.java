@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping(value = "/api/user", produces = "text/plain;charset=UTF-8")
+@RequestMapping(value = "/api/user", produces = {"application/json;charset=UTF-8", "text/plain;charset=UTF-8"})
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;

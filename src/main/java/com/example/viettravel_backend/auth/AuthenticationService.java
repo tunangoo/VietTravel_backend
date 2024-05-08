@@ -44,9 +44,8 @@ public class AuthenticationService {
             throw new ParamInvalidException("Mật khẩu không chính xác");
         }
         var accessToken = jwtService.generateToken(user);
-//        return AuthenticationResponse.builder()
-//                .accessToken(accessToken)
-//                .build();
-        throw new ParamInvalidException(accessToken);
+        return AuthenticationResponse.builder()
+                .accessToken(accessToken)
+                .build();
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping(value = "/api/place", produces = "text/plain;charset=UTF-8")
+@RequestMapping(value = "/api/place", produces = {"application/json;charset=UTF-8", "text/plain;charset=UTF-8"})
 @RequiredArgsConstructor
 public class PlaceController {
     private final PlaceService placeService;

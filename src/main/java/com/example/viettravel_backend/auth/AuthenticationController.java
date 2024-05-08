@@ -7,14 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping(value = "/api/auth", produces = "text/plain;charset=UTF-8")
+@RequestMapping(value = "/api/auth", produces = {"application/json;charset=UTF-8", "text/plain;charset=UTF-8"})
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
