@@ -16,7 +16,7 @@ public class UpdateInfoRequest {
     @NotNull
     private String fullName;
 
-    private LocalDate birthday;
+//    private LocalDate birthday;
 
     @Pattern(regexp = "^[0-9]+$")
     private String phoneNumber;

@@ -50,9 +50,9 @@ public class UserService {
         if (request.getEmail() != null) {
             user.setEmail(request.getEmail());
         }
-        if (request.getBirthday() != null) {
-            user.setBirthday(request.getBirthday());
-        }
+//        if (request.getBirthday() != null) {
+//            user.setBirthday(request.getBirthday());
+//        }
         if (request.getAddress() != null) {
             user.setAddress(request.getAddress());
         }

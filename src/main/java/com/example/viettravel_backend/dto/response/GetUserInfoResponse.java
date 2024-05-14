@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class GetUserInfoResponse {
     private String fullName;
 
-    private LocalDate birthday;
+//    private LocalDate birthday;
 
     private String phoneNumber;
 
