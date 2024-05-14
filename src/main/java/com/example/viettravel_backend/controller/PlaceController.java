@@ -1,6 +1,8 @@
 package com.example.viettravel_backend.controller;
 
+import com.example.viettravel_backend.dto.request.GetPlaceDetailRequest;
 import com.example.viettravel_backend.service.PlaceService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,5 +19,12 @@ public class PlaceController {
     @GetMapping("/all")
     public ResponseEntity<?> getAllPlaces() throws ResponseStatusException {
         return ResponseEntity.ok(placeService.getAllPlaces());
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity<?> getPlaceDetail(
+            @RequestBody GetPlaceDetailRequest request
+    ) throws ResponseStatusException {
+        return ResponseEntity.ok(placeService.getPlaceDetail(request));
     }
 }

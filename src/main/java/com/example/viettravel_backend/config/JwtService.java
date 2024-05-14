@@ -18,7 +18,7 @@ import java.util.function.Function;
 @Component
 public class JwtService {
     private static final String SECRET_KEY = "j2PQl40P5Z5ooFKxCVaPi3mdxyWsgQeG2RU+GQrXNmg=";
-    private static final long jwtExpiration = 1000 * 60 * 60; // 1h
+    private static final long jwtExpiration = 1000 * 60 * 60 * 60; // 1h
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

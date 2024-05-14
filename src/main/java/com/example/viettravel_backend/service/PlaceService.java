@@ -1,7 +1,11 @@
 package com.example.viettravel_backend.service;
 
+import com.example.viettravel_backend.dto.request.GetPlaceDetailRequest;
 import com.example.viettravel_backend.dto.response.GetAllPlacesResponse;
+import com.example.viettravel_backend.dto.response.GetPlaceDetailResponse;
 import com.example.viettravel_backend.entity.Place;
+import com.example.viettravel_backend.exception.ParamInvalidException;
+import com.example.viettravel_backend.repository.PlaceImageRepository;
 import com.example.viettravel_backend.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlaceService {
     private final PlaceRepository placeRepository;
+    private final PlaceImageRepository placeImageRepository;
 
     public List<GetAllPlacesResponse> getAllPlaces() throws ResponseStatusException {
         List<GetAllPlacesResponse> responses = new ArrayList<>();
@@ -30,5 +35,21 @@ public class PlaceService {
         }
 
         return responses;
+    }
+
+    public GetPlaceDetailResponse getPlaceDetail(GetPlaceDetailRequest request) throws ResponseStatusException {
+        Place place = placeRepository.findById(request.getPlace_id())
+                .orElseThrow(() -> new ParamInvalidException("Place_id không chính xác"));
+
+        List<String> images = placeImageRepository.findAllByPlaceId(request.getPlace_id());
+
+        return GetPlaceDetailResponse.builder()
+                .placeId(place.getId())
+                .name(place.getName())
+                .address(place.getAddress())
+                .price(place.getPrice())
+                .description(place.getDescription())
+                .images(images)
+                .build();
     }
 }
