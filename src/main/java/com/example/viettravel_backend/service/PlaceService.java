@@ -30,6 +30,7 @@ public class PlaceService {
                     .name(place.getName())
                     .address(place.getAddress())
                     .imageUrl(place.getImageUrl())
+                    .price(place.getPrice())
                     .build();
             responses.add(response);
         }

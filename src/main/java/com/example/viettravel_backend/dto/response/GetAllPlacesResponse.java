@@ -17,4 +17,6 @@ public class GetAllPlacesResponse {
     private String address;
 
     private String imageUrl;
+
+    private Long price;
 }
