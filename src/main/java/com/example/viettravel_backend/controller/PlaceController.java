@@ -5,9 +5,7 @@ import com.example.viettravel_backend.service.PlaceService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
@@ -21,10 +19,10 @@ public class PlaceController {
         return ResponseEntity.ok(placeService.getAllPlaces());
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/detail/{place_id}")
     public ResponseEntity<?> getPlaceDetail(
-            @RequestBody GetPlaceDetailRequest request
+            @PathVariable Long place_id
     ) throws ResponseStatusException {
-        return ResponseEntity.ok(placeService.getPlaceDetail(request));
+        return ResponseEntity.ok(placeService.getPlaceDetail(place_id));
     }
 }

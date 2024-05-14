@@ -37,11 +37,11 @@ public class PlaceService {
         return responses;
     }
 
-    public GetPlaceDetailResponse getPlaceDetail(GetPlaceDetailRequest request) throws ResponseStatusException {
-        Place place = placeRepository.findById(request.getPlace_id())
+    public GetPlaceDetailResponse getPlaceDetail(Long place_id) throws ResponseStatusException {
+        Place place = placeRepository.findById(place_id)
                 .orElseThrow(() -> new ParamInvalidException("Place_id không chính xác"));
 
-        List<String> images = placeImageRepository.findAllByPlaceId(request.getPlace_id());
+        List<String> images = placeImageRepository.findAllByPlaceId(place_id);
 
         return GetPlaceDetailResponse.builder()
                 .placeId(place.getId())
