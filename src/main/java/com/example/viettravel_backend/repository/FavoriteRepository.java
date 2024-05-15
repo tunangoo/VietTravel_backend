@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -23,4 +24,6 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
         @Param("user_id") Long user_id,
         @Param("place_id") Long place_id
     );
+
+    List<Favorite> findAllByUserId(Long userId);
 }

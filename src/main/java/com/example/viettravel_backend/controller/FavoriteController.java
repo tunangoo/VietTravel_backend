@@ -36,4 +36,9 @@ public class FavoriteController {
         favoriteService.DeleteFavorite(request);
         return ResponseEntity.ok("Xóa địa điểm yêu thích thành công");
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllFavorite() throws ResponseStatusException {
+        return ResponseEntity.ok(favoriteService.getAllFavorite());
+    }
 }
