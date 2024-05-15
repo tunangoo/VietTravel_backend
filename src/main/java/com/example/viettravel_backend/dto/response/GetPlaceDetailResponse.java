@@ -23,4 +23,6 @@ public class GetPlaceDetailResponse {
     private String description;
 
     private List<String> images;
+
+    private boolean favorite;
 }

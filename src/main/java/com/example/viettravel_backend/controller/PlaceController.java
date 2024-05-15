@@ -1,8 +1,6 @@
 package com.example.viettravel_backend.controller;
 
-import com.example.viettravel_backend.dto.request.GetPlaceDetailRequest;
 import com.example.viettravel_backend.service.PlaceService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
