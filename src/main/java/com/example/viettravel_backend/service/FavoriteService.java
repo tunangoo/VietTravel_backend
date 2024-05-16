@@ -24,8 +24,7 @@ public class FavoriteService {
     private final UserService userService;
 
     public void AddFavorite(AddFavoriteRequest request) throws ResponseStatusException {
-        User user = userRepository.findById(userService.getId())
-                .orElseThrow(() -> new ParamInvalidException("User không tồn tại"));
+        User user = userService.getUser();
 
         Place place = placeRepository.findById(request.getPlace_id())
                 .orElseThrow(() -> new ParamInvalidException("Place không tồn tại"));
@@ -42,7 +41,7 @@ public class FavoriteService {
     }
 
     public void DeleteFavorite(DeleteFavoriteRequest request) throws ResponseStatusException {
-        if(placeRepository.existsById(request.getPlace_id())) {
+        if(!placeRepository.existsById(request.getPlace_id())) {
             throw new ParamInvalidException("Place không tồn tại");
         }
 
