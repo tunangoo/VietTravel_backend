@@ -17,6 +17,11 @@ public class PlaceController {
         return ResponseEntity.ok(placeService.getAllPlaces());
     }
 
+    @GetMapping("/recommend")
+    public ResponseEntity<?> getRecommendedPlaces() throws ResponseStatusException {
+        return ResponseEntity.ok(placeService.getRecommendedPlaces());
+    }
+
     @GetMapping("/detail/{place_id}")
     public ResponseEntity<?> getPlaceDetail(
             @PathVariable Long place_id

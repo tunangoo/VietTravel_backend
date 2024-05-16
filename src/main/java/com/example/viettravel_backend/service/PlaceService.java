@@ -1,7 +1,7 @@
 package com.example.viettravel_backend.service;
 
-import com.example.viettravel_backend.dto.response.GetAllPlacesResponse;
 import com.example.viettravel_backend.dto.response.GetPlaceDetailResponse;
+import com.example.viettravel_backend.dto.response.GetPlaceSummaryResponse;
 import com.example.viettravel_backend.entity.Place;
 import com.example.viettravel_backend.exception.ParamInvalidException;
 import com.example.viettravel_backend.repository.FavoriteRepository;
@@ -22,22 +22,35 @@ public class PlaceService {
     private final FavoriteRepository favoriteRepository;
     private final UserService userService;
 
-    public List<GetAllPlacesResponse> getAllPlaces() throws ResponseStatusException {
-        List<GetAllPlacesResponse> responses = new ArrayList<>();
+    public List<GetPlaceSummaryResponse> getAllPlaces() throws ResponseStatusException {
+        List<GetPlaceSummaryResponse> responses = new ArrayList<>();
 
         List<Place> places = placeRepository.findAll();
         for (Place place : places) {
-            GetAllPlacesResponse response = GetAllPlacesResponse.builder()
-                    .id(place.getId())
-                    .name(place.getName())
-                    .address(place.getAddress())
-                    .imageUrl(place.getImageUrl())
-                    .price(place.getPrice())
-                    .rating(place.getRating())
-                    .build();
-            responses.add(response);
+            boolean favorite;
+            if(favoriteRepository.findByUserIdAndPlaceId(userService.getId(), place.getId()).isPresent()) {
+                favorite = true;
+            } else {
+                favorite = false;
+            }
+            responses.add(GetPlaceSummaryResponse.convertfromPlace(place, favorite));
         }
+        return responses;
+    }
 
+    public List<GetPlaceSummaryResponse> getRecommendedPlaces() throws ResponseStatusException {
+        List<GetPlaceSummaryResponse> responses = new ArrayList<>();
+
+        List<Place> places = placeRepository.findRecommend();
+        for (Place place : places) {
+            boolean favorite;
+            if(favoriteRepository.findByUserIdAndPlaceId(userService.getId(), place.getId()).isPresent()) {
+                favorite = true;
+            } else {
+                favorite = false;
+            }
+            responses.add(GetPlaceSummaryResponse.convertfromPlace(place, favorite));
+        }
         return responses;
     }
 
