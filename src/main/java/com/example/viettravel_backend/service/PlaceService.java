@@ -33,6 +33,7 @@ public class PlaceService {
                     .address(place.getAddress())
                     .imageUrl(place.getImageUrl())
                     .price(place.getPrice())
+                    .rating(place.getRating())
                     .build();
             responses.add(response);
         }
@@ -61,6 +62,7 @@ public class PlaceService {
                 .description(place.getDescription())
                 .images(images)
                 .favorite(isFavorite)
+                .rating(place.getRating())
                 .build();
     }
 }

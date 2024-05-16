@@ -19,4 +19,6 @@ public class GetAllPlacesResponse {
     private String imageUrl;
 
     private Long price;
+
+    private Double rating;
 }

@@ -30,6 +30,9 @@ public class AddPlaceRequest {
     private String imageUrl;
 
     @NotNull
+    private Double rating;
+
+    @NotNull
     private ArrayList<String> images;
 
     public Place mappingToPlace() {
@@ -39,6 +42,7 @@ public class AddPlaceRequest {
         place.setDescription(description);
         place.setPrice(price);
         place.setImageUrl(imageUrl);
+        place.setRating(rating);
         return place;
     }
 }

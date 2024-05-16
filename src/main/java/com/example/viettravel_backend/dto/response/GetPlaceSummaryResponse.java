@@ -26,6 +26,8 @@ public class GetPlaceSummaryResponse {
 
     private boolean favorite;
 
+    private Double rating;
+
     public static GetPlaceSummaryResponse convertfromPlace(Place place, boolean favorite) {
         //xử lí address lấy tỉnh ở cuối sau dấy phẩy
         List<String> adr = Arrays.asList(place.getAddress().split(","));
@@ -37,6 +39,10 @@ public class GetPlaceSummaryResponse {
             address2 = address2.substring(10);
         }
 
+        if(address2.toLowerCase().startsWith("tp ")) {
+            address2 = address2.substring(3);
+        }
+
         return GetPlaceSummaryResponse.builder()
                 .placeId(place.getId())
                 .name(place.getName())
@@ -44,6 +50,7 @@ public class GetPlaceSummaryResponse {
                 .price(place.getPrice())
                 .imageUrl(place.getImageUrl())
                 .favorite(favorite)
+                .rating(place.getRating())
                 .build();
     }
 }

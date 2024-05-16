@@ -43,6 +43,10 @@ public class Place extends BaseEntity {
     @NotNull
     private String imageUrl;
 
+    @Column(name = "rating")
+    @NotNull
+    private Double rating;
+
     @OneToMany(mappedBy = "place")
     private Set<Favorite> favorites;
 
