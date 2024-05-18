@@ -23,4 +23,6 @@ public class GetUserInfoResponse {
     private String address;
 
     private String avatar;
+
+    private Long balance;
 }

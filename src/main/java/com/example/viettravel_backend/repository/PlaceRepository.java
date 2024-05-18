@@ -21,4 +21,11 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     )
     List<Place> findRecommend();
 
+    @Query(
+            value = "select * " +
+                    "from places " +
+                    "where price = 0",
+            nativeQuery = true
+    )
+    List<Place> findFree();
 }

@@ -61,11 +61,14 @@ public class User extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Column(name = "balance")
+    private Long balance;
+
     @OneToMany(mappedBy = "user")
     private Set<Favorite> favorites;
 
-    @ManyToMany(mappedBy = "users")
-    @JsonIgnore
+    @JsonIgnore    @ManyToMany(mappedBy = "users")
+
     private Set<Ticket> tickets = new HashSet<>();
 
     @Override

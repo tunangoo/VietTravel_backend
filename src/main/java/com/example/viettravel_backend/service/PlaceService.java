@@ -22,10 +22,8 @@ public class PlaceService {
     private final FavoriteRepository favoriteRepository;
     private final UserService userService;
 
-    public List<GetPlaceSummaryResponse> getAllPlaces() throws ResponseStatusException {
+    private List<GetPlaceSummaryResponse> convertPlaceSummary(List<Place> places) {
         List<GetPlaceSummaryResponse> responses = new ArrayList<>();
-
-        List<Place> places = placeRepository.findAll();
         for (Place place : places) {
             boolean favorite;
             if(favoriteRepository.findByUserIdAndPlaceId(userService.getId(), place.getId()).isPresent()) {
@@ -38,20 +36,19 @@ public class PlaceService {
         return responses;
     }
 
-    public List<GetPlaceSummaryResponse> getRecommendedPlaces() throws ResponseStatusException {
-        List<GetPlaceSummaryResponse> responses = new ArrayList<>();
+    public List<GetPlaceSummaryResponse> getAllPlaces() throws ResponseStatusException {
+        List<Place> places = placeRepository.findAll();
+        return convertPlaceSummary(places);
+    }
 
+    public List<GetPlaceSummaryResponse> getRecommendedPlaces() throws ResponseStatusException {
         List<Place> places = placeRepository.findRecommend();
-        for (Place place : places) {
-            boolean favorite;
-            if(favoriteRepository.findByUserIdAndPlaceId(userService.getId(), place.getId()).isPresent()) {
-                favorite = true;
-            } else {
-                favorite = false;
-            }
-            responses.add(GetPlaceSummaryResponse.convertfromPlace(place, favorite));
-        }
-        return responses;
+        return convertPlaceSummary(places);
+    }
+
+    public List<GetPlaceSummaryResponse> getFreePlaces() throws ResponseStatusException {
+        List<Place> places = placeRepository.findFree();
+        return convertPlaceSummary(places);
     }
 
     public GetPlaceDetailResponse getPlaceDetail(Long place_id) throws ResponseStatusException {
